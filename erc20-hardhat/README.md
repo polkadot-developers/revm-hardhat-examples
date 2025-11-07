@@ -88,13 +88,14 @@ This will:
 
 ### Polkadot Testnet
 
-To deploy to the Polkadot testnet:
+To deploy to the Polkadot testnet, you need an account with funds to send the transaction. The Hardhat configuration uses a Configuration Variable called `TESTNET_PRIVATE_KEY` for the private key of the deployment account.
 
-1. **Set up environment variables**:
-   Create a `.env` file in the project root:
+1. **Set the private key using Hardhat keystore**:
+   ```bash
+   npx hardhat keystore set TESTNET_PRIVATE_KEY
    ```
-   PRIVATE_KEY=your_private_key_here
-   ```
+   
+   You'll be prompted to enter your private key securely. This approach is recommended as it stores the key encrypted on your system.
 
 2. **Deploy to testnet**:
    ```bash
@@ -103,9 +104,9 @@ To deploy to the Polkadot testnet:
 
 ## Configuration
 
-### Environment Variables
+### Configuration Variables
 
-- `PRIVATE_KEY`: The private key of the account you want to use for deployment (required for testnet deployment)
+- `TESTNET_PRIVATE_KEY`: The private key of the account you want to use for deployment (set using `npx hardhat keystore set TESTNET_PRIVATE_KEY`)
 
 ### Network Configuration
 
