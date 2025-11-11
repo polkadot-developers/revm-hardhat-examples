@@ -1,10 +1,10 @@
 # ERC-20 Token Hardhat Example
 
-A complete ERC-20 token implementation using Hardhat 3 Beta, featuring modern development tools including the native Node.js test runner (`node:test`) and the `viem` library for Ethereum interactions.
+A complete ERC-20 token implementation using Hardhat v2, featuring modern development tools and best practices for deploying to the Polkadot testnet.
 
 ## Overview
 
-This project demonstrates how to create, deploy, and interact with an ERC-20 token contract using industry best practices. The token implementation includes standard ERC-20 functionality plus additional features like minting and permit functionality.
+This project demonstrates how to create, deploy, and test an ERC-20 token contract using Hardhat. The token implementation includes standard ERC-20 functionality plus minting capabilities and owner controls.
 
 ## Token Features
 
@@ -28,13 +28,15 @@ The `MyToken` contract implements:
 ```
 erc20-hardhat/
 ├── contracts/
-│   ├── MyToken.sol          # Main ERC-20 token contract
-│   └── MyToken.t.sol        # Foundry-style Solidity tests
+│   └── MyToken.sol          # Main ERC-20 token contract
+├── test/
+│   └── MyToken.test.ts      # Mocha/Chai tests
 ├── ignition/
 │   └── modules/
 │       └── MyToken.ts       # Deployment configuration
 ├── artifacts/               # Compiled contracts (auto-generated)
 ├── cache/                   # Hardhat cache (auto-generated)
+├── typechain-types/         # TypeScript types (auto-generated)
 ├── hardhat.config.ts        # Hardhat configuration
 ├── package.json             # Project dependencies
 ├── tsconfig.json            # TypeScript configuration
@@ -57,10 +59,16 @@ npx hardhat compile
 
 ### 3. Run Tests
 
-Run all tests (both Solidity and TypeScript):
+Run tests against the Polkadot testnet:
 
 ```bash
-npx hardhat test
+npm run test:polkadot
+```
+
+Or run tests on the default Hardhat network:
+
+```bash
+npm test
 ```
 
 ### 4. Deploy Locally
@@ -88,25 +96,63 @@ This will:
 
 ### Polkadot Testnet
 
-To deploy to the Polkadot testnet, you need an account with funds to send the transaction. The Hardhat configuration uses a Configuration Variable called `TESTNET_PRIVATE_KEY` for the private key of the deployment account.
+To deploy to the Polkadot testnet, you need an account with funds to send the transaction. The Hardhat configuration uses Configuration Variables for secure private key management.
 
-1. **Set the private key using Hardhat keystore**:
+#### Setup Configuration Variables
+
+1. **Set your private key**:
    ```bash
-   npx hardhat keystore set TESTNET_PRIVATE_KEY
+   npx hardhat vars set TESTNET_PRIVATE_KEY
    ```
    
-   You'll be prompted to enter your private key securely. This approach is recommended as it stores the key encrypted on your system.
+   You'll be prompted to enter your private key securely. The value is encrypted and stored locally.
 
-2. **Deploy to testnet**:
+2. **(Optional) Set a custom network URL**:
    ```bash
-   npx hardhat ignition deploy ignition/modules/MyToken.ts --network polkadotTestnet
+   npx hardhat vars set TESTNET_URL
    ```
+   
+   If not set, defaults to `http://127.0.0.1:8545`
+
+3. **Verify your configuration**:
+   ```bash
+   npx hardhat vars list
+   ```
+
+#### Deploy to Testnet
+
+```bash
+npx hardhat ignition deploy ignition/modules/MyToken.ts --network polkadotTestnet
+```
+
+**Note**: If you get an error about pending transactions, wait a minute for previous transactions to be confirmed (they need 5 confirmations), then try again.
 
 ## Configuration
 
 ### Configuration Variables
 
-- `TESTNET_PRIVATE_KEY`: The private key of the account you want to use for deployment (set using `npx hardhat keystore set TESTNET_PRIVATE_KEY`)
+Hardhat Configuration Variables provide secure, encrypted storage for sensitive data:
+
+- `TESTNET_PRIVATE_KEY`: Your private key for deployment (required)
+- `TESTNET_URL`: Custom RPC endpoint (optional, defaults to `http://127.0.0.1:8545`)
+
+**Useful Commands**:
+```bash
+# Set a variable (will prompt for value)
+npx hardhat vars set TESTNET_PRIVATE_KEY
+
+# List all variables
+npx hardhat vars list
+
+# View a variable
+npx hardhat vars get TESTNET_PRIVATE_KEY
+
+# Delete a variable
+npx hardhat vars delete TESTNET_PRIVATE_KEY
+
+# See storage location
+npx hardhat vars path
+```
 
 ### Network Configuration
 
@@ -142,31 +188,39 @@ await token.balanceOf("0x...");
 
 ## Development Features
 
-This project showcases modern Ethereum development practices:
+This project uses modern Ethereum development practices:
 
-- **Hardhat 3 Beta**: Latest features and improvements
+- **Hardhat v2**: Stable, production-ready development environment
 - **TypeScript**: Full type safety throughout the project
-- **Viem**: Modern, performant Ethereum library
-- **Node.js Test Runner**: Native `node:test` for fast testing
-- **Foundry Compatibility**: Solidity tests that work with both Hardhat and Foundry
+- **Ethers v6**: Modern Ethereum library for contract interactions
+- **Mocha + Chai**: Robust testing framework
+- **TypeChain**: Auto-generated TypeScript types for contracts
 - **OpenZeppelin**: Industry-standard smart contract libraries
-- **Ignition**: Declarative deployment system
+- **Hardhat Ignition**: Declarative deployment system
+- **Configuration Variables**: Secure, encrypted key management
 
 ## Testing
 
-The project includes comprehensive tests:
+The project includes comprehensive TypeScript tests using Mocha and Chai:
 
-- **Solidity Tests**: `contracts/MyToken.t.sol` - Foundry-style tests
-- **TypeScript Tests**: Integration tests using `node:test` and `viem`
+- **Test File**: `test/MyToken.test.ts`
+- **Framework**: Mocha with Chai assertions
+- **Features Tested**:
+  - Contract deployment
+  - Token name, symbol, and decimals
+  - Owner assignment
+  - Minting functionality
+  - Balance tracking
+  - Total supply updates
 
-Run specific test types:
+Run tests:
 
 ```bash
-# All tests
-npx hardhat test
+# Against Polkadot testnet
+npm run test:polkadot
 
-# Only Solidity tests
-npx hardhat test --grep "\.t\.sol"
+# On Hardhat network
+npm test
 ```
 
 ## Security Considerations
@@ -178,10 +232,11 @@ npx hardhat test --grep "\.t\.sol"
 
 ## Learn More
 
-- [Hardhat 3 Beta Documentation](https://hardhat.org/docs/getting-started#getting-started-with-hardhat-3)
-- [OpenZeppelin ERC-20 Documentation](https://docs.openzeppelin.com/contracts/4.x/erc20)
+- [Hardhat Documentation](https://hardhat.org/hardhat-runner/docs/getting-started)
+- [Hardhat Configuration Variables](https://hardhat.org/hardhat-runner/docs/guides/configuration-variables)
+- [OpenZeppelin ERC-20 Documentation](https://docs.openzeppelin.com/contracts/5.x/erc20)
 - [ERC-20 Permit Explanation](https://eips.ethereum.org/EIPS/eip-2612)
-- [Viem Documentation](https://viem.sh/)
+- [Ethers.js Documentation](https://docs.ethers.org/v6/)
 
 ## Contributing
 

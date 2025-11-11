@@ -18,9 +18,14 @@
 
 # Typechain output
 /types
+/typechain-types
 
 # Hardhat coverage reports
 /coverage
 
 # Local .env
 .env
+
+
+.github/instructions/kluster-code-verify.instructions.md
+.kluster
