@@ -1,0 +1,21 @@
+{
+  "name": "uniswap-v2-core-hardhat",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "test:polkadot": "hardhat test --network polkadotTestnet",
+    "deploy": "hardhat run scripts/deploy.ts",
+    "deploy:polkadot": "hardhat run scripts/deploy.ts --network polkadotTestnet"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@types/node": "^20.11.19",
+    "hardhat": "^2.22.16",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.3.3"
+  }
+}

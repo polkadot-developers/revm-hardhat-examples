@@ -8,6 +8,7 @@ This repository contains the following example projects:
 
 - [**basic-hardhat**](./basic-hardhat/) - minimal `Storage` contract deployment using Hardhat — the ideal starting point
 - [**erc20-hardhat**](./erc20-hardhat/) - implementation of an ERC-20 token contract using Hardhat
+- [**uniswap-v2-core-hardhat**](./uniswap-v2-core-hardhat/) - Uniswap V2 core protocol (factory, pair, AMM) using Hardhat
 
 Each subfolder is a standalone Hardhat project with its own configuration, contracts, deployment scripts, and tests.
 
