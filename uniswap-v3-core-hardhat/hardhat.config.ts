@@ -26,6 +26,11 @@ const config: HardhatUserConfig = {
         enabled: true,
         runs: 800,
       },
+      metadata: {
+        // Exclude metadata hash to keep contract size deterministic and under EIP-170 limit
+        // This matches the original Uniswap V3 Core deployment configuration
+        bytecodeHash: "none",
+      },
     },
   },
   networks: {
@@ -41,6 +46,9 @@ const config: HardhatUserConfig = {
         ? [vars.get("TESTNET_PRIVATE_KEY")]
         : [],
     },
+  },
+  ignition: {
+    requiredConfirmations: 1,
   },
   mocha: {
     timeout: 120000,
