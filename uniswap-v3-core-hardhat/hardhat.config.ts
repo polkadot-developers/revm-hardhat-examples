@@ -53,13 +53,6 @@ const config: HardhatUserConfig = {
   },
   mocha: {
     timeout: 120000,
-    // On localNode, skip the 256-RPC-loop BitMath tests (all powers of 2).
-    // These fire 256 consecutive eth_call requests which overwhelms the Polkadot
-    // local node's TCP connection limit, causing ECONNRESET. Their correctness is
-    // already covered by the hardhat network run. All other 693 tests pass on localNode.
-    ...(process.env.HARDHAT_NETWORK === "localNode"
-      ? { grep: "all powers of 2", invert: true }
-      : {}),
   },
 };
 
