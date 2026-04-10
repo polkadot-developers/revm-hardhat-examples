@@ -39,6 +39,7 @@ const config: HardhatUserConfig = {
     },
     localNode: {
       url: "http://127.0.0.1:8545",
+      gasPrice: 50_000_000_000, // 50 gwei — matches Polkadot local node reported gas price
     },
     polkadotTestnet: {
       url: "https://services.polkadothub-rpc.com/testnet",
