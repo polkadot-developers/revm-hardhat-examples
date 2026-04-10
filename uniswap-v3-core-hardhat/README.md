@@ -74,7 +74,7 @@ uniswap-v3-core-hardhat/
 │   └── deploy.ts                     # Deployment script
 ├── ignition/
 │   └── modules/
-│       └── UniswapV3Core.ts          # Ignition deployment module
+│       └── UniswapV3Factory.ts       # Ignition deployment module
 ├── artifacts/                        # Compiled contracts (auto-generated)
 ├── cache/                            # Hardhat cache (auto-generated)
 ├── typechain-types/                  # TypeScript types (auto-generated)
@@ -123,7 +123,7 @@ npm run deploy
 Or deploy using Hardhat Ignition:
 
 ```bash
-npx hardhat ignition deploy ignition/modules/UniswapV3Core.ts
+npx hardhat ignition deploy ignition/modules/UniswapV3Factory.ts
 ```
 
 ## Deployment
@@ -157,7 +157,7 @@ To deploy to the Polkadot testnet, you need an account with funds. The configura
 
    Or via Ignition:
    ```bash
-   npx hardhat ignition deploy ignition/modules/UniswapV3Core.ts --network polkadotTestnet
+   npx hardhat ignition deploy ignition/modules/UniswapV3Factory.ts --network polkadotTestnet
    ```
 
 ## Configuration
@@ -193,8 +193,8 @@ Solidity 0.7.6 is compiled with the optimizer enabled (`runs: 800`) and `bytecod
 
 The test suite covers 187 tests in two files:
 
-- **UniswapV3Factory** (18 tests): pool creation, fee tiers, ownership, `feeAmountTickSpacing`
-- **UniswapV3Pool** (~170 tests): initialization, mint, burn, swap (exact input/output, with/without fee), flash loans, fee protocol collection, reentrancy guards, observe (TWAP)
+- **UniswapV3Factory** (21 tests): pool creation, fee tiers, ownership, `feeAmountTickSpacing`
+- **UniswapV3Pool** (166 tests): initialization, mint, burn, swap (exact input/output, with/without fee), flash loans, fee protocol collection, reentrancy guards, observe (TWAP)
 
 Run tests:
 
