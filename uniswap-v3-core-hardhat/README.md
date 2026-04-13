@@ -63,8 +63,8 @@ uniswap-v3-core-hardhat/
 │   ├── libraries/                    # Math and utility libraries
 │   └── test/                         # Test helper contracts
 ├── test/
-│   ├── UniswapV3Factory.test.ts      # Factory tests (18 tests)
-│   ├── UniswapV3Pool.test.ts         # Pool tests: mint, burn, swap, flash, fees (~170 tests)
+│   ├── UniswapV3Factory.test.ts      # Factory tests (21 tests)
+│   ├── UniswapV3Pool.test.ts         # Pool tests (166 tests)
 │   └── shared/
 │       ├── fixtures.ts               # Test fixtures and pool setup helpers
 │       ├── utilities.ts              # Test utilities
@@ -75,9 +75,6 @@ uniswap-v3-core-hardhat/
 ├── ignition/
 │   └── modules/
 │       └── UniswapV3Factory.ts       # Ignition deployment module
-├── artifacts/                        # Compiled contracts (auto-generated)
-├── cache/                            # Hardhat cache (auto-generated)
-├── typechain-types/                  # TypeScript types (auto-generated)
 ├── hardhat.config.ts                 # Hardhat configuration
 ├── package.json                      # Project dependencies
 ├── tsconfig.json                     # TypeScript configuration
