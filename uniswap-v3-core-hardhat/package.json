@@ -17,9 +17,7 @@
     "bignumber.js": "^9.1.2",
     "hardhat": "^2.22.16",
     "ts-node": "^10.9.2",
-    "typescript": "~5.3.3"
-  },
-  "dependencies": {
+    "typescript": "~5.3.3",
     "decimal.js": "^10.6.0"
   }
 }
