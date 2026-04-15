@@ -10,6 +10,7 @@ This repository contains the following example projects:
 - [**erc20-hardhat**](./erc20-hardhat/) - implementation of an ERC-20 token contract using Hardhat
 - [**uniswap-v2-core-hardhat**](./uniswap-v2-core-hardhat/) - Uniswap V2 core protocol (factory, pair, AMM) using Hardhat
 - [**uniswap-v2-periphery-hardhat**](./uniswap-v2-periphery-hardhat/) - Uniswap V2 periphery contracts (Router01, Router02, WETH9) using Hardhat
+- [**uniswap-v3-core-hardhat**](./uniswap-v3-core-hardhat/) - Uniswap V3 core protocol (factory, concentrated-liquidity pool) using Hardhat
 
 Each subfolder is a standalone Hardhat project with its own configuration, contracts, deployment scripts, and tests.
 
