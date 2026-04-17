@@ -1,0 +1,28 @@
+{
+  "name": "uniswap-v3-periphery-hardhat",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "test:polkadot": "hardhat test --network polkadotTestnet",
+    "deploy": "hardhat run scripts/deploy.ts",
+    "deploy:polkadot": "hardhat run scripts/deploy.ts --network polkadotTestnet"
+  },
+  "dependencies": {
+    "@uniswap/v3-core": "file:../uniswap-v3-core-hardhat",
+    "@openzeppelin/contracts": "3.4.2-solc-0.7",
+    "@uniswap/lib": "4.0.1-alpha",
+    "base64-sol": "1.0.1"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@types/node": "^20.11.19",
+    "bignumber.js": "^9.1.2",
+    "hardhat": "^2.22.16",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.3.3"
+  }
+}
